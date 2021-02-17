@@ -37,11 +37,11 @@ def callback_query(call):
 	    	
 	    	except Exception as e:
 	    		
+	    		bot.send_message(admin_id, e)
+
 	    		bot.edit_message_text(f'Error! Clearing...', call.message.chat.id, call.message.message_id)
 	    		sleep(1.5)
 	    		bot.edit_message_text(f'| ', call.message.chat.id, call.message.message_id, reply_markup = calc)
-
-	    		bot.send_message(admin_id, e)
 
 	    elif call.data == 'C':
 
@@ -59,7 +59,11 @@ def callback_query(call):
 
 	except Exception as e:
 
-		bot.edit_message_text('| ', call.message.chat.id, call.message.message_id, reply_markup = calc)
 		bot.send_message(admin_id, e)
+
+		try:
+			bot.edit_message_text('| ', call.message.chat.id, call.message.message_id, reply_markup = calc)
+		except:
+			pass
 
 bot.polling(interval = 1)
