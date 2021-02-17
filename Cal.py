@@ -39,8 +39,13 @@ def callback_query(call):
 	    	
 	    	except Exception as e:
 	    		
-	    		bot.answer_callback_query("Кальчулятор сломався(", call.id)
-	    		bot.edit_message_text(f'| ', call.message.chat.id, call.message.message_id, reply_markup = calc)
+	    		try:
+	    		
+		    		bot.answer_callback_query(callback_query_id = call.id, text = 'Кальчулятор сломався(', show_alert = False)
+		    		bot.edit_message_text(f'| ', call.message.chat.id, call.message.message_id, reply_markup = calc)
+
+		    	except:
+		    		pass
 
 	    elif call.data == 'C':
 
