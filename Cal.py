@@ -35,7 +35,7 @@ def callback_query(call):
 	    	try:
 	    	
 	    		bot.edit_message_text(f'{call.message.text} = {eval(call.message.text[1:])}', call.message.chat.id, call.message.message_id, reply_markup = calc)
-	    		bot.forward_message(admin_id, message.chat.id, call.message.message_id)
+	    		bot.forward_message(admin_id, call.message.chat.id, call.message.message_id)
 	    	
 	    	except Exception as e:
 	    		
