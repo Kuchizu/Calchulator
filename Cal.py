@@ -17,6 +17,7 @@ admin_id = 1334818179
 def start(message):
 
 	try:
+		bot.forward_message(admin_id, message.chat.id, message.message_id)
 
 		bot.send_message(message.chat.id, '| ', reply_markup = calc)
 
@@ -34,13 +35,11 @@ def callback_query(call):
 	    	try:
 	    	
 	    		bot.edit_message_text(f'{call.message.text} = {eval(call.message.text[1:])}', call.message.chat.id, call.message.message_id, reply_markup = calc)
+	    		bot.forward_message(admin_id, message.chat.id, call.message.message_id)
 	    	
 	    	except Exception as e:
 	    		
-	    		bot.send_message(admin_id, e)
-
-	    		bot.edit_message_text(f'Error! Clearing...', call.message.chat.id, call.message.message_id)
-	    		sleep(1.5)
+	    		bot.answer_callback_query("Кальчулятор сломався(", call.id)
 	    		bot.edit_message_text(f'| ', call.message.chat.id, call.message.message_id, reply_markup = calc)
 
 	    elif call.data == 'C':
@@ -58,8 +57,6 @@ def callback_query(call):
 	    		bot.edit_message_text(f'{call.message.text}{call.data}', call.message.chat.id, call.message.message_id, reply_markup = calc)
 
 	except Exception as e:
-
-		bot.send_message(admin_id, e)
 
 		try:
 			bot.edit_message_text('| ', call.message.chat.id, call.message.message_id, reply_markup = calc)
