@@ -68,4 +68,4 @@ def callback_query(call):
 		except:
 			pass
 
-bot.polling(interval = 1)
+bot.polling()
